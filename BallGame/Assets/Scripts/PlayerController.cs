@@ -24,4 +24,12 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
+	//This wil be called when a Trigger object (the player) first triggers the collider
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.CompareTag ("Pickup")) {
+			other.gameObject.SetActive(false);
+		}
+
+	}
+
 }
