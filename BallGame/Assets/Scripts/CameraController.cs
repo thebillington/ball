@@ -16,7 +16,10 @@ public class CameraController : MonoBehaviour {
 	
 	// Late Update is called after everything in update has been called
 	void LateUpdate () {
-		offset = Quaternion.AngleAxis (Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
+
+		offset = Quaternion.AngleAxis (Input.GetAxis ("Horizontal") * turnSpeed, Vector3.up) * offset;
+		transform.position = player.transform.position + offset;
+		offset = Quaternion.AngleAxis (Input.GetAxis ("Vertical") * turnSpeed, Vector3.left) * offset;
 		transform.position = player.transform.position + offset;
 		transform.LookAt (player.transform.position);
 	}
