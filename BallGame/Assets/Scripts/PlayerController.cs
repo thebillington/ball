@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public Text countText;
+	public Text winText;
 
 	private Rigidbody rb;
+	private int count;
 
 	void Start() {
 		//Initialise the RigidBody attached to the sphere
 		rb = GetComponent<Rigidbody> ();
+		count = 0;
+		setCountText ();
+		winText.text = "";
 	}
 
 	//Fixed Update is called just before performing any physics calculation
@@ -28,8 +35,18 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Pickup")) {
 			other.gameObject.SetActive(false);
+			count ++;
+			setCountText();
 		}
 
 	}
+
+	void setCountText() {
+		countText.text = "Score: " + count.ToString();
+		if (count == 14) {
+			winText.text = "You win!";
+		}
+	}
+
 
 }
