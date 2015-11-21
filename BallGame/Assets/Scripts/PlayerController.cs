@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour {
 
 	float speedCount = 0.1f;
 
+	private bool jumping = false;
+	private int sinceJump = 0;
+
 	private Rigidbody rb;
 	private int score;
 	private int level = 1;
@@ -34,7 +37,26 @@ public class PlayerController : MonoBehaviour {
 		//Return the Horizontal and Vertical axes as floats
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 
-		rb.velocity = (new Vector3(moveHorizontal, -1.0f, 0.1f * speedCount) * speed);
+		if (jumping) {
+			sinceJump++;
+		}
+		if (!jumping && Input.GetKeyDown ("space")) {
+			rb.AddForce (new Vector3 (moveHorizontal, 20.0f, 0.1f * speedCount) * speed);
+			jumping = true;
+			sinceJump ++;
+		}
+		else if (jumping && sinceJump < 10) {
+			rb.AddForce (new Vector3 (moveHorizontal, 20.0f, 0.1f * speedCount) * speed);
+		} else {
+			rb.AddForce (new Vector3 (0, -20.0f, 0) * speed);
+			if(sinceJump > 20) {
+				sinceJump = 0;
+				jumping = false;
+			}
+		}
+
+		rb.velocity = (new Vector3 (moveHorizontal, 0, 0.1f * speedCount) * speed);
+
 		setText ();
 
 	}
