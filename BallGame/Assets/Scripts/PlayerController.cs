@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 		//Return the Horizontal and Vertical axes as floats
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 
-		rb.velocity = (new Vector3(moveHorizontal, 0.0f, 0.1f * speedCount) * speed);
+		rb.velocity = (new Vector3(moveHorizontal, -1.0f, 0.1f * speedCount) * speed);
 		setText ();
 
 	}
