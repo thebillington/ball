@@ -18,18 +18,14 @@ public class CameraController : MonoBehaviour {
 	void LateUpdate () {
 
 		offset = Quaternion.AngleAxis (Input.GetAxis ("Horizontal") * turnSpeed, Vector3.up) * offset;
-		if (offset.x > 0) {
+		if (offset.x > 0.5) {
 			offset.x -= 5.0f * Time.deltaTime;
-		} else if (offset.x < 0) {
+		}
+		if (offset.x < -0.5) {
 			offset.x += 5.0f * Time.deltaTime;
 		}
-		if (offset.x > 2.0f) {
-			offset.x -= 5.0f * Time.deltaTime;
-		} else if (offset.x < -2.0f) {
-			offset.x += 5.0f * Time.deltaTime;
-		}
-		offset.y = 10.0f;
-		offset.z = -20.0f;
+		offset.y = 2.0f;
+		offset.z = -6.0f;
 		transform.position = player.transform.position + offset;
 		transform.LookAt (player.transform.position);
 	}
