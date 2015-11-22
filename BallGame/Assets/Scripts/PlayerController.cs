@@ -26,8 +26,15 @@ public class PlayerController : MonoBehaviour {
 		score = 0;
 		setText ();
 
+		//Initialise game objects
+		thisGround = new GameObject();
+		prevGround = new GameObject();
+		prevprevGround = new GameObject();
+
 		//Initialise the ground
-		thisGround = Instantiate(groundPrefab, new Vector3(0, 0, transform.position.z + 240), Quaternion.identity) as GameObject;
+		Transform t = (Transform) Instantiate(groundPrefab, new Vector3(0, 0, transform.position.z + 240), Quaternion.identity);
+		thisGround = t.gameObject;
+		print (thisGround);
 	}
 
 	void Update() {
@@ -66,7 +73,8 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Midpoint")) {
 			prevprevGround = prevGround;
 			prevGround = thisGround;
-			thisGround = Instantiate(groundPrefab, new Vector3(0, 0, transform.position.z + 500), Quaternion.identity) as GameObject;
+			Transform t = (Transform) Instantiate(groundPrefab, new Vector3(0, 0, transform.position.z + 500), Quaternion.identity);
+			thisGround = t.gameObject;
 			Destroy(prevprevGround);
 		}
 
