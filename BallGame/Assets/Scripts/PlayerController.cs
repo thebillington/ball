@@ -8,17 +8,30 @@ public class PlayerController : MonoBehaviour {
 	public Text scoreText;
 	public Text levelText;
 
+	public Transform groundPrefab;
+
 	float speedCount = 0.1f;
 
 	private Rigidbody rb;
 	private int score;
 	private int level = 1;
 
+	GameObject thisGround;
+	GameObject prevGround;
+	GameObject prevprevGround;
+
 	void Start() {
 		//Initialise the RigidBody attached to the sphere
 		rb = GetComponent<Rigidbody> ();
 		score = 0;
 		setText ();
+
+		//Initialise the ground
+		thisGround = Instantiate(groundPrefab, new Vector3(0, 0, transform.position.z + 240), Quaternion.identity) as GameObject;
+	}
+
+	void Update() {
+		print (transform.position.z.ToString ());
 	}
 
 	//Fixed Update is called just before performing any physics calculation
@@ -48,6 +61,13 @@ public class PlayerController : MonoBehaviour {
 				level++;
 			}
 			setText();
+		}
+
+		if (other.gameObject.CompareTag ("Midpoint")) {
+			prevprevGround = prevGround;
+			prevGround = thisGround;
+			thisGround = Instantiate(groundPrefab, new Vector3(0, 0, transform.position.z + 500), Quaternion.identity) as GameObject;
+			Destroy(prevprevGround);
 		}
 
 	}
