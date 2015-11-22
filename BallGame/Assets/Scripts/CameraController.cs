@@ -24,8 +24,8 @@ public class CameraController : MonoBehaviour {
 		if (offset.x < -0.5) {
 			offset.x += 5.0f * Time.deltaTime;
 		}
-		offset.y = 2.0f;
-		offset.z = -6.0f;
+		offset.y = 10.0f;
+		offset.z = -15.0f;
 		transform.position = player.transform.position + offset;
 		transform.LookAt (player.transform.position);
 	}
