@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour {
 
 		speedCount += 0.1f;
 
-		if(speedCount > 10.0f * level) {// * speedCount) * level) {
-			speedCount = 10.0f * level;// * speedCount * level;
+		if(speedCount > 10.0f * Mathf.Log(level + 1)) {// * speedCount) * level) {
+			speedCount = 10.0f * Mathf.Log(level + 1);// * speedCount * level;
 		}
 
 		//Return the Horizontal and Vertical axes as floats
